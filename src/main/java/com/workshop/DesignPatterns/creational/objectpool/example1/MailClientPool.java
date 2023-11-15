@@ -11,23 +11,22 @@ public class MailClientPool {
         this.serverAddress = serverAddress;
         this.maxSize = maxSize;
         pool = new LinkedList<>();
-        for (int i = 0; i < maxSize; i++) {
-            pool.add(new MailClient(serverAddress));
-        }
     }
 
-    public synchronized MailClient acquireClient() throws InterruptedException {
-        if (pool.isEmpty()) {
-            wait();
+    public synchronized MailClient acquireClient() {
+        if (!pool.isEmpty()) {
+            return pool.removeFirst(); // Changed from pop to removeFirst
         }
-        return pool.removeFirst();
+
+        // If pool is empty, create a new MailClient
+        return new MailClient(serverAddress);
     }
 
     public synchronized void releaseClient(MailClient client) {
         if (pool.size() < maxSize) {
-            pool.addFirst(client);
-            notify();
+            pool.addFirst(client); // Changed from push to addFirst
         } else {
+            // Close and dispose the client if the pool is full
             client.close();
         }
     }
