@@ -3,9 +3,9 @@ package com.workshop.DesignPatterns.creational.objectpool.example1;
 import java.util.LinkedList;
 
 public class MailClientPool {
-    private LinkedList<MailClient> pool;
-    private String serverAddress;
-    private int maxSize;
+    private final LinkedList<MailClient> pool;
+    private final String serverAddress;
+    private final int maxSize;
 
     public MailClientPool(String serverAddress, int maxSize) {
         this.serverAddress = serverAddress;

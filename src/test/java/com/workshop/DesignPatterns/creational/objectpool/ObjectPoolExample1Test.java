@@ -19,7 +19,6 @@ public class ObjectPoolExample1Test {
 
     @Test
     public void testAcquireClient() {
-        System.out.println("test");
         MailClient client1 = pool.acquireClient();
         assertNotNull(client1);
 
