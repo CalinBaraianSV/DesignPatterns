@@ -20,7 +20,7 @@ public class BuilderExample1Test {
         assertNotNull(report);
         assertEquals(title, report.getTitle());
         assertEquals(content, report.getContent());
-        System.out.println("FinancialReport.FinancialReportBuilder(title=" + report.getTitle() + ", content=" + report.getContent() + ")");
+        System.out.println(report);
     }
 
 }

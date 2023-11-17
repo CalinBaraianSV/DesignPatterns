@@ -27,10 +27,10 @@ public class ObjectPoolExample1Test {
 
 
         MailClient client3 = pool.acquireClient();
+        assertNotNull(client3);
         pool.releaseClient(client1);
         pool.releaseClient(client2);
         pool.releaseClient(client3);
-        assertNotNull(client3);
     }
 
     @Test
@@ -39,6 +39,7 @@ public class ObjectPoolExample1Test {
         pool.releaseClient(client1);
 
         MailClient client2 = pool.acquireClient();
+        System.out.println("First client :" + client1 + ". Second client :" + client2);
         assertSame(client1, client2);
     }
 

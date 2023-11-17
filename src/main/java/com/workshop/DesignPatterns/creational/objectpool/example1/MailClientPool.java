@@ -15,16 +15,15 @@ public class MailClientPool {
 
     public synchronized MailClient acquireClient() {
         if (!pool.isEmpty()) {
-            return pool.removeFirst(); // Changed from pop to removeFirst
+            return pool.removeFirst();
         }
 
-        // If pool is empty, create a new MailClient
         return new MailClient(serverAddress);
     }
 
     public synchronized void releaseClient(MailClient client) {
         if (pool.size() < maxSize) {
-            pool.addFirst(client); // Changed from push to addFirst
+            pool.addFirst(client);
         } else {
             // Close and dispose the client if the pool is full
             client.close();
